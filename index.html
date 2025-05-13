@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .game-menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .game-btn {
+      padding: 20px 40px;
+      background-color: #00ffd5;
+      color: #1e1f26;
+      text-decoration: none;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .game-btn:hover {
+      background-color: #00c2a2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Game Hub</h1>
+    <div class="game-menu">
+      <a href="games/tic-tac-toe.html" class="game-btn">Tic Tac Toe</a>
+      <a href="games/sudoku.html" class="game-btn">Sudoku</a>
+      <a href="games/snake-ladder.html" class="game-btn">Snake Ladder</a>
+      <a href="games/breakout.html" class="game-btn">Breakout</a>
+
+    </div>
+  </div>
+</body>
+</html>
