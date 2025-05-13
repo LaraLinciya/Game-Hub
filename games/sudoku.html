@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Game</title>
+  <style>
+    /* Body styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('sudoku-bg.jpg'); /* Add your background image */
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Center the game container */
+    .game-container {
+      background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    /* Sudoku board styling */
+    .sudoku-board {
+      display: grid;
+      grid-template-columns: repeat(9, 50px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .cell {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 1.5rem;
+      border: 1px solid #000;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .cell input {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .cell.read-only {
+      background-color: #f0f0f0;
+    }
+
+    /* Check solution button styling */
+    button {
+      padding: 10px 20px;
+      background-color: #00c2a2;
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00ffd5;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Sudoku Game</h1>
+    <div class="sudoku-board" id="board"></div>
+    <button onclick="checkSolution()">Check Solution</button>
+  </div>
+
+  <script>
+    const board = [
+      [5, 3, 0, 0, 7, 0, 0, 0, 0],
+      [6, 0, 0, 1, 9, 5, 0, 0, 0],
+      [0, 9, 8, 0, 0, 0, 0, 6, 0],
+      [8, 0, 0, 0, 6, 0, 0, 0, 3],
+      [4, 0, 0, 8, 0, 3, 0, 0, 1],
+      [7, 0, 0, 0, 2, 0, 0, 0, 6],
+      [0, 6, 0, 0, 0, 0, 2, 8, 0],
+      [0, 0, 0, 4, 1, 9, 0, 0, 5],
+      [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    ];
+
+    function createBoard() {
+      const boardElement = document.getElementById("board");
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          if (board[i][j] !== 0) {
+            cell.textContent = board[i][j];
+            cell.classList.add("read-only");
+          } else {
+            const input = document.createElement("input");
+            input.type = "number";
+            input.min = 1;
+            input.max = 9;
+            input.addEventListener("input", () => {
+              if (input.value < 1 || input.value > 9) input.value = "";
+            });
+            cell.appendChild(input);
+          }
+          boardElement.appendChild(cell);
+        }
+      }
+    }
+
+    function checkSolution() {
+      let isValid = true;
+      const inputs = document.querySelectorAll(".cell input");
+      let userBoard = [];
+
+      for (let i = 0; i < 9; i++) {
+        userBoard.push([]);
+        for (let j = 0; j < 9; j++) {
+          const cell = document.querySelectorAll(".cell")[i * 9 + j];
+          const input = cell.querySelector("input");
+          const value = input ? parseInt(input.value) : board[i][j];
+          userBoard[i].push(value);
+        }
+      }
+
+      // Validate rows, columns and 3x3 grids
+      for (let i = 0; i < 9; i++) {
+        let row = new Set();
+        let col = new Set();
+        for (let j = 0; j < 9; j++) {
+          row.add(userBoard[i][j]);
+          col.add(userBoard[j][i]);
+        }
+        if (row.size !== 9 || col.size !== 9) {
+          isValid = false;
+        }
+      }
+
+      alert(isValid ? "Congratulations, you solved the puzzle!" : "Incorrect solution. Try again.");
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
