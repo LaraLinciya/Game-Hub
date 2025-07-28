@@ -16,7 +16,7 @@
 
 ## 🔗 Live Demo
 
-👉 [Click here to play GameHub](https://LaraLinciya.github.io/Game-Hub-JS)
+👉 [Click here to play GameHub](https://laralinciya.github.io/Game-Hub/)
 
 ---
 
